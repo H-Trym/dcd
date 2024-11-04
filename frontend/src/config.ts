@@ -1,4 +1,4 @@
-import { AppModuleInitiator } from "@equinor/fusion-framework-app"
+import configureModules, { AppModuleInitiator } from "@equinor/fusion-framework-app"
 import { enableAgGrid } from "@equinor/fusion-framework-module-ag-grid"
 import { enableNavigation } from "@equinor/fusion-framework-module-navigation"
 import { enableContext } from "@equinor/fusion-framework-module-context"
@@ -16,6 +16,7 @@ import { ExcelExportModule } from "@ag-grid-enterprise/excel-export"
 
 export const configure: AppModuleInitiator = (configurator, args) => {
     const { agGridLicense } = (args.env.config?.environment as { agGridLicense?: string })
+    console.log("args: ", args.env.config?.environment)
     const { basename } = args.env
 
     ModuleRegistry.registerModules([
