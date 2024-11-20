@@ -9,15 +9,15 @@ public class SubstructureWithProfilesDto
     [Required]
     public Guid Id { get; set; }
     [Required]
-    public string Name { get; set; } = string.Empty!;
+    public string Name { get; set; } = string.Empty;
     [Required]
     public Guid ProjectId { get; set; }
     [Required]
-    public SubstructureCostProfileDto CostProfile { get; set; } = new SubstructureCostProfileDto();
+    public SubstructureCostProfileDto CostProfile { get; set; } = new();
     [Required]
-    public SubstructureCostProfileOverrideDto CostProfileOverride { get; set; } = new SubstructureCostProfileOverrideDto();
+    public SubstructureCostProfileOverrideDto CostProfileOverride { get; set; } = new();
     [Required]
-    public SubstructureCessationCostProfileDto CessationCostProfile { get; set; } = new SubstructureCessationCostProfileDto();
+    public SubstructureCessationCostProfileDto CessationCostProfile { get; set; } = new();
     [Required]
     public double DryWeight { get; set; }
     [Required]
@@ -38,15 +38,12 @@ public class SubstructureWithProfilesDto
     public DateTimeOffset? DG4Date { get; set; }
 }
 
-public class SubstructureCostProfileDto : TimeSeriesCostDto
-{
-}
+public class SubstructureCostProfileDto : TimeSeriesCostDto;
+
 public class SubstructureCostProfileOverrideDto : TimeSeriesCostDto, ITimeSeriesOverrideDto
 {
     [Required]
     public bool Override { get; set; }
 }
 
-public class SubstructureCessationCostProfileDto : TimeSeriesCostDto
-{
-}
+public class SubstructureCessationCostProfileDto : TimeSeriesCostDto;

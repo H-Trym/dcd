@@ -1,6 +1,8 @@
 using api.Authorization;
 using api.Dtos;
+using api.Models.Fusion;
 using api.Services;
+using api.Services.Fusion;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Web.Resource;
@@ -10,17 +12,10 @@ namespace api.Controllers;
 [ApiController]
 [Route("projects/{projectId}/members")]
 [RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
-public class ProjectMembersController : ControllerBase
+public class ProjectMembersController(
+    IProjectMemberService projectMemberService,
+    IOrgChartMemberService fusionPeopleService) : ControllerBase
 {
-    private readonly IProjectMemberService _projectMemberService;
-
-    public ProjectMembersController(
-        IProjectMemberService projectMemberService
-    )
-    {
-        _projectMemberService = projectMemberService;
-    }
-
     [RequiresApplicationRoles(
         ApplicationRole.Admin,
         ApplicationRole.User
@@ -29,7 +24,7 @@ public class ProjectMembersController : ControllerBase
     [ActionType(ActionType.Edit)]
     public async Task Get(Guid projectId, Guid userId)
     {
-        await _projectMemberService.DeleteProjectMember(projectId, userId);
+        await projectMemberService.DeleteProjectMember(projectId, userId);
     }
 
     [HttpPost]
@@ -38,9 +33,20 @@ public class ProjectMembersController : ControllerBase
         ApplicationRole.User
     )]
     [ActionType(ActionType.Edit)]
-    public async Task<ProjectMemberDto> CreateProjectMember([FromRoute] Guid projectId, [FromBody] CreateProjectMemberDto createProjectMemberDto)
+    public async Task<ProjectMemberDto> CreateProjectMember([FromRoute] Guid projectId,
+        [FromBody] CreateProjectMemberDto createProjectMemberDto)
     {
-        return await _projectMemberService.CreateProjectMember(projectId, createProjectMemberDto);
+        return await projectMemberService.CreateProjectMember(projectId, createProjectMemberDto);
     }
 
+    [HttpGet("/context/{contextId:guid}")]
+    [RequiresApplicationRoles(
+        ApplicationRole.Admin,
+        ApplicationRole.User
+    )]
+    [ActionType(ActionType.Edit)]
+    public async Task<List<FusionPersonV1>> GetOrgChartMembers([FromRoute] Guid contextId)
+    {
+        return await fusionPeopleService.GetAllPersonsOnProject(contextId, 100, 0);
+    }
 }

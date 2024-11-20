@@ -4,7 +4,7 @@ using api.Models.Interfaces;
 
 namespace api.Models;
 
-public class Exploration : IHasProjectId
+public class Exploration : IHasProjectId, IChangeTrackable
 {
     public Guid Id { get; set; }
     public virtual Project Project { get; set; } = null!;
@@ -19,7 +19,7 @@ public class Exploration : IHasProjectId
     public virtual GAndGAdminCostOverride? GAndGAdminCostOverride { get; set; }
     public double RigMobDemob { get; set; }
     public Currency Currency { get; set; }
-    public virtual ICollection<ExplorationWell>? ExplorationWells { get; set; }
+    public virtual ICollection<ExplorationWell> ExplorationWells { get; set; } = [];
 }
 
 public class ExplorationWellCostProfile : TimeSeriesCost, IExplorationTimeSeries

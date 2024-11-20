@@ -13,21 +13,21 @@ public class WellProjectWithProfilesDto
     [Required]
     public string Name { get; set; } = string.Empty;
     [Required]
-    public OilProducerCostProfileDto OilProducerCostProfile { get; set; } = new OilProducerCostProfileDto();
+    public OilProducerCostProfileDto OilProducerCostProfile { get; set; } = new();
     [Required]
-    public OilProducerCostProfileOverrideDto OilProducerCostProfileOverride { get; set; } = new OilProducerCostProfileOverrideDto();
+    public OilProducerCostProfileOverrideDto OilProducerCostProfileOverride { get; set; } = new();
     [Required]
-    public GasProducerCostProfileDto GasProducerCostProfile { get; set; } = new GasProducerCostProfileDto();
+    public GasProducerCostProfileDto GasProducerCostProfile { get; set; } = new();
     [Required]
-    public GasProducerCostProfileOverrideDto GasProducerCostProfileOverride { get; set; } = new GasProducerCostProfileOverrideDto();
+    public GasProducerCostProfileOverrideDto GasProducerCostProfileOverride { get; set; } = new();
     [Required]
-    public WaterInjectorCostProfileDto WaterInjectorCostProfile { get; set; } = new WaterInjectorCostProfileDto();
+    public WaterInjectorCostProfileDto WaterInjectorCostProfile { get; set; } = new();
     [Required]
-    public WaterInjectorCostProfileOverrideDto WaterInjectorCostProfileOverride { get; set; } = new WaterInjectorCostProfileOverrideDto();
+    public WaterInjectorCostProfileOverrideDto WaterInjectorCostProfileOverride { get; set; } = new();
     [Required]
-    public GasInjectorCostProfileDto GasInjectorCostProfile { get; set; } = new GasInjectorCostProfileDto();
+    public GasInjectorCostProfileDto GasInjectorCostProfile { get; set; } = new();
     [Required]
-    public GasInjectorCostProfileOverrideDto GasInjectorCostProfileOverride { get; set; } = new GasInjectorCostProfileOverrideDto();
+    public GasInjectorCostProfileOverrideDto GasInjectorCostProfileOverride { get; set; } = new();
     [Required]
     public ArtificialLift ArtificialLift { get; set; }
     [Required]
@@ -36,9 +36,7 @@ public class WellProjectWithProfilesDto
     public List<WellProjectWellDto> WellProjectWells { get; set; } = [];
 }
 
-public class OilProducerCostProfileDto : TimeSeriesCostDto
-{
-}
+public class OilProducerCostProfileDto : TimeSeriesCostDto;
 
 public class OilProducerCostProfileOverrideDto : TimeSeriesCostDto, ITimeSeriesOverrideDto
 {
@@ -46,9 +44,7 @@ public class OilProducerCostProfileOverrideDto : TimeSeriesCostDto, ITimeSeriesO
     public bool Override { get; set; }
 }
 
-public class GasProducerCostProfileDto : TimeSeriesCostDto
-{
-}
+public class GasProducerCostProfileDto : TimeSeriesCostDto;
 
 public class GasProducerCostProfileOverrideDto : TimeSeriesCostDto, ITimeSeriesOverrideDto
 {
@@ -56,9 +52,7 @@ public class GasProducerCostProfileOverrideDto : TimeSeriesCostDto, ITimeSeriesO
     public bool Override { get; set; }
 }
 
-public class WaterInjectorCostProfileDto : TimeSeriesCostDto
-{
-}
+public class WaterInjectorCostProfileDto : TimeSeriesCostDto;
 
 public class WaterInjectorCostProfileOverrideDto : TimeSeriesCostDto, ITimeSeriesOverrideDto
 {
@@ -66,9 +60,7 @@ public class WaterInjectorCostProfileOverrideDto : TimeSeriesCostDto, ITimeSerie
     public bool Override { get; set; }
 }
 
-public class GasInjectorCostProfileDto : TimeSeriesCostDto
-{
-}
+public class GasInjectorCostProfileDto : TimeSeriesCostDto;
 
 public class GasInjectorCostProfileOverrideDto : TimeSeriesCostDto, ITimeSeriesOverrideDto
 {

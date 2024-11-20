@@ -13,19 +13,19 @@ public class ExplorationWithProfilesDto
     [Required]
     public string Name { get; set; } = string.Empty;
     [Required]
-    public ExplorationWellCostProfileDto ExplorationWellCostProfile { get; set; } = new ExplorationWellCostProfileDto();
+    public ExplorationWellCostProfileDto ExplorationWellCostProfile { get; set; } = new();
     [Required]
-    public AppraisalWellCostProfileDto AppraisalWellCostProfile { get; set; } = new AppraisalWellCostProfileDto();
+    public AppraisalWellCostProfileDto AppraisalWellCostProfile { get; set; } = new();
     [Required]
-    public SidetrackCostProfileDto SidetrackCostProfile { get; set; } = new SidetrackCostProfileDto();
+    public SidetrackCostProfileDto SidetrackCostProfile { get; set; } = new();
     [Required]
-    public GAndGAdminCostDto GAndGAdminCost { get; set; } = new GAndGAdminCostDto();
+    public GAndGAdminCostDto GAndGAdminCost { get; set; } = new();
     [Required]
-    public GAndGAdminCostOverrideDto GAndGAdminCostOverride { get; set; } = new GAndGAdminCostOverrideDto();
+    public GAndGAdminCostOverrideDto GAndGAdminCostOverride { get; set; } = new();
     [Required]
-    public SeismicAcquisitionAndProcessingDto SeismicAcquisitionAndProcessing { get; set; } = new SeismicAcquisitionAndProcessingDto();
+    public SeismicAcquisitionAndProcessingDto SeismicAcquisitionAndProcessing { get; set; } = new();
     [Required]
-    public CountryOfficeCostDto CountryOfficeCost { get; set; } = new CountryOfficeCostDto();
+    public CountryOfficeCostDto CountryOfficeCost { get; set; } = new();
     [Required]
     public double RigMobDemob { get; set; }
     [Required]
@@ -34,32 +34,20 @@ public class ExplorationWithProfilesDto
     public List<ExplorationWellDto>? ExplorationWells { get; set; } = [];
 }
 
-public class ExplorationWellCostProfileDto : TimeSeriesCostDto
-{
+public class ExplorationWellCostProfileDto : TimeSeriesCostDto;
 
-}
-public class AppraisalWellCostProfileDto : TimeSeriesCostDto
-{
+public class AppraisalWellCostProfileDto : TimeSeriesCostDto;
 
-}
-public class SidetrackCostProfileDto : TimeSeriesCostDto
-{
+public class SidetrackCostProfileDto : TimeSeriesCostDto;
 
-}
-public class GAndGAdminCostDto : TimeSeriesCostDto
-{
+public class GAndGAdminCostDto : TimeSeriesCostDto;
 
-}
 public class GAndGAdminCostOverrideDto : TimeSeriesCostDto, ITimeSeriesOverrideDto
 {
     [Required]
     public bool Override { get; set; }
 }
-public class SeismicAcquisitionAndProcessingDto : TimeSeriesCostDto
-{
 
-}
-public class CountryOfficeCostDto : TimeSeriesCostDto
-{
+public class SeismicAcquisitionAndProcessingDto : TimeSeriesCostDto;
 
-}
+public class CountryOfficeCostDto : TimeSeriesCostDto;

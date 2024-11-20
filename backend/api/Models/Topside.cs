@@ -4,10 +4,10 @@ using api.Models.Interfaces;
 
 namespace api.Models;
 
-public class Topside : IHasProjectId
+public class Topside : IHasProjectId, IChangeTrackable
 {
     public Guid Id { get; set; }
-    public string Name { get; set; } = string.Empty!;
+    public string Name { get; set; } = string.Empty;
     public virtual Project Project { get; set; } = null!;
     public Guid ProjectId { get; set; }
     public virtual TopsideCostProfile? CostProfile { get; set; }

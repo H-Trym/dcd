@@ -4,7 +4,7 @@ using api.Models.Interfaces;
 
 namespace api.Models;
 
-public class WellProject : IHasProjectId
+public class WellProject : IHasProjectId, IChangeTrackable
 {
     public Guid Id { get; set; }
     public virtual Project Project { get; set; } = null!;
@@ -20,58 +20,50 @@ public class WellProject : IHasProjectId
     public virtual GasInjectorCostProfileOverride? GasInjectorCostProfileOverride { get; set; }
     public ArtificialLift ArtificialLift { get; set; }
     public Currency Currency { get; set; }
-    public virtual ICollection<WellProjectWell>? WellProjectWells { get; set; }
+    public virtual ICollection<WellProjectWell> WellProjectWells { get; set; } = [];
 }
 
 public class OilProducerCostProfile : TimeSeriesCost, IWellProjectTimeSeries
 {
-    [ForeignKey("WellProject.Id")]
-    public virtual WellProject WellProject { get; set; } = null!;
+    [ForeignKey("WellProject.Id")] public virtual WellProject WellProject { get; set; } = null!;
 }
 
 public class OilProducerCostProfileOverride : TimeSeriesCost, IWellProjectTimeSeries, ITimeSeriesOverride
 {
-    [ForeignKey("WellProject.Id")]
-    public virtual WellProject WellProject { get; set; } = null!;
+    [ForeignKey("WellProject.Id")] public virtual WellProject WellProject { get; set; } = null!;
     public bool Override { get; set; }
 }
 
 public class GasProducerCostProfile : TimeSeriesCost, IWellProjectTimeSeries
 {
-    [ForeignKey("WellProject.Id")]
-    public virtual WellProject WellProject { get; set; } = null!;
+    [ForeignKey("WellProject.Id")] public virtual WellProject WellProject { get; set; } = null!;
 }
 
 public class GasProducerCostProfileOverride : TimeSeriesCost, IWellProjectTimeSeries, ITimeSeriesOverride
 {
-    [ForeignKey("WellProject.Id")]
-    public virtual WellProject WellProject { get; set; } = null!;
+    [ForeignKey("WellProject.Id")] public virtual WellProject WellProject { get; set; } = null!;
     public bool Override { get; set; }
 }
 
 public class WaterInjectorCostProfile : TimeSeriesCost, IWellProjectTimeSeries
 {
-    [ForeignKey("WellProject.Id")]
-    public virtual WellProject WellProject { get; set; } = null!;
+    [ForeignKey("WellProject.Id")] public virtual WellProject WellProject { get; set; } = null!;
 }
 
 public class WaterInjectorCostProfileOverride : TimeSeriesCost, IWellProjectTimeSeries, ITimeSeriesOverride
 {
-    [ForeignKey("WellProject.Id")]
-    public virtual WellProject WellProject { get; set; } = null!;
+    [ForeignKey("WellProject.Id")] public virtual WellProject WellProject { get; set; } = null!;
     public bool Override { get; set; }
 }
 
 public class GasInjectorCostProfile : TimeSeriesCost, IWellProjectTimeSeries
 {
-    [ForeignKey("WellProject.Id")]
-    public virtual WellProject WellProject { get; set; } = null!;
+    [ForeignKey("WellProject.Id")] public virtual WellProject WellProject { get; set; } = null!;
 }
 
 public class GasInjectorCostProfileOverride : TimeSeriesCost, IWellProjectTimeSeries, ITimeSeriesOverride
 {
-    [ForeignKey("WellProject.Id")]
-    public virtual WellProject WellProject { get; set; } = null!;
+    [ForeignKey("WellProject.Id")] public virtual WellProject WellProject { get; set; } = null!;
     public bool Override { get; set; }
 }
 

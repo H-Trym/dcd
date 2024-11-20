@@ -6,13 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace api.Repositories;
 
-public class WellRepository : BaseRepository, IWellRepository
+public class WellRepository(DcdDbContext context) : BaseRepository(context), IWellRepository
 {
-
-    public WellRepository(DcdDbContext context) : base(context)
-    {
-    }
-
     public async Task<Well?> GetWell(Guid wellId)
     {
         return await Get<Well>(wellId);
@@ -20,14 +15,14 @@ public class WellRepository : BaseRepository, IWellRepository
 
     public async Task<IEnumerable<Case>> GetCasesAffectedByDeleteWell(Guid wellId)
     {
-        var well = await _context.Wells
-            .Include(w => w.WellProjectWells)!
+        var well = await Context.Wells
+            .Include(w => w.WellProjectWells)
                 .ThenInclude(wp => wp.DrillingSchedule)
-            .Include(w => w.WellProjectWells)!
+            .Include(w => w.WellProjectWells)
                 .ThenInclude(wp => wp.WellProject)
-            .Include(w => w.ExplorationWells)!
+            .Include(w => w.ExplorationWells)
                 .ThenInclude(ew => ew.DrillingSchedule)
-            .Include(w => w.ExplorationWells)!
+            .Include(w => w.ExplorationWells)
                 .ThenInclude(ew => ew.Exploration)
             .FirstOrDefaultAsync(w => w.Id == wellId);
 
@@ -43,7 +38,7 @@ public class WellRepository : BaseRepository, IWellRepository
             .Select(ew => ew.Exploration.Id)
             .Distinct() ?? [];
 
-        var cases = await _context.Cases
+        var cases = await Context.Cases
             .Where(c => wellProjectIds.Contains(c.WellProjectLink) || explorationIds.Contains(c.ExplorationLink))
             .ToListAsync();
 
@@ -57,12 +52,12 @@ public class WellRepository : BaseRepository, IWellRepository
 
     public Well AddWell(Well well)
     {
-        _context.Add(well);
+        Context.Add(well);
         return well;
     }
 
     public void DeleteWell(Well well)
     {
-        _context.Remove(well);
+        Context.Remove(well);
     }
 }
