@@ -1,4 +1,4 @@
-import { AgChartsReact } from "ag-charts-react"
+import { AgCharts } from "ag-charts-react"
 
 interface Props {
     data: any
@@ -77,7 +77,7 @@ export const AgChartsPie = ({
 
     return (
         <div>
-            <AgChartsReact
+            <AgCharts
                 options={defaultOptions}
             />
         </div>

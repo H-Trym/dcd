@@ -1,4 +1,4 @@
-import { AgChartsReact } from "ag-charts-react"
+import { AgCharts } from "ag-charts-react"
 import { insertIf, separateProfileObjects } from "./AgChartHelperFunctions"
 
 interface Props {
@@ -64,7 +64,7 @@ export const AgChartsCompareCases = ({
 
     return (
         <div>
-            <AgChartsReact
+            <AgCharts
                 options={defaultOptions}
             />
         </div>

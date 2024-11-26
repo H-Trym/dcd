@@ -1,12 +1,35 @@
-import { RouterProvider, RouteObject } from "react-router-dom"
+import { RouterProvider } from "react-router-dom"
 import { useRouter } from "@equinor/fusion-framework-react-app/navigation"
+import { AgnosticRouteObject } from "@remix-run/router"
 import Overview from "./Components/Overview"
 import ProjectView from "./Views/ProjectView"
 import CaseView from "./Views/CaseView"
 import Header from "./Components/Header"
 import ProjectSkeleton from "./Components/LoadingSkeletons/ProjectSkeleton"
 
-const routes: RouteObject[] = [
+// const routes: RouteObject[] = [
+//     {
+//         path: "/",
+//         element: <Header />,
+//         children: [
+//             {
+//                 path: ":fusionContextId",
+//                 element: <Overview />,
+//                 children: [
+//                     { index: true, element: <ProjectView /> },
+//                     { path: "revision/:revisionId", element: <ProjectView /> },
+//                     { path: "revision/:revisionId/case/:caseId", element: <CaseView /> },
+//                     { path: "revision/:revisionId/case/:caseId/:tab", element: <CaseView /> },
+//                     { path: "case/:caseId", element: <CaseView /> },
+//                     { path: "case/:caseId/:tab", element: <CaseView /> },
+//                 ],
+//                 shouldRevalidate: () => true,
+//             },
+//         ],
+//     },
+// ]
+
+const routes: AgnosticRouteObject[] = [
     {
         path: "/",
         element: <Header />,
@@ -14,13 +37,14 @@ const routes: RouteObject[] = [
             {
                 path: ":fusionContextId",
                 element: <Overview />,
+                shouldRevalidate: () => true,
                 children: [
-                    { index: true, element: <ProjectView /> },
-                    { path: "revision/:revisionId", element: <ProjectView /> },
-                    { path: "revision/:revisionId/case/:caseId", element: <CaseView /> },
-                    { path: "revision/:revisionId/case/:caseId/:tab", element: <CaseView /> },
-                    { path: "case/:caseId", element: <CaseView /> },
-                    { path: "case/:caseId/:tab", element: <CaseView /> },
+                    { index: true, element: <ProjectView />, children: undefined },
+                    { path: "revision/:revisionId", element: <ProjectView />, index: false },
+                    { path: "revision/:revisionId/case/:caseId", element: <CaseView />, index: false },
+                    { path: "revision/:revisionId/case/:caseId/:tab", element: <CaseView />, index: false },
+                    { path: "case/:caseId", element: <CaseView />, index: false },
+                    { path: "case/:caseId/:tab", element: <CaseView />, index: false },
                 ],
             },
         ],

@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react"
-import { AgChartsReact } from "ag-charts-react"
+import { AgCharts } from "ag-charts-react"
 import { Grid } from "@mui/material"
 import { useModuleCurrentContext } from "@equinor/fusion-framework-react-module-context"
 import { useQuery } from "@tanstack/react-query"
@@ -314,10 +314,10 @@ const AggregatedTotals: React.FC<AggregatedTotalsProps> = ({
     return (
         <Grid container spacing={2} style={{ width: "100%" }}>
             <Grid item lg={12} xl={7}>
-                <AgChartsReact options={barChartOptions} style={{ height: "100%" }} />
+                <AgCharts options={barChartOptions} style={{ height: "100%" }} />
             </Grid>
             <Grid item lg={8} xl={5}>
-                <AgChartsReact options={pieChartOptions} style={{ height: "100%" }} />
+                <AgCharts options={pieChartOptions} style={{ height: "100%" }} />
             </Grid>
         </Grid>
     )

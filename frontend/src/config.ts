@@ -1,4 +1,4 @@
-import configureModules, { AppModuleInitiator } from "@equinor/fusion-framework-app"
+import { AppModuleInitiator } from "@equinor/fusion-framework-app"
 import { enableAgGrid } from "@equinor/fusion-framework-module-ag-grid"
 import { enableNavigation } from "@equinor/fusion-framework-module-navigation"
 import { enableContext } from "@equinor/fusion-framework-module-context"
@@ -16,8 +16,8 @@ import { ExcelExportModule } from "@ag-grid-enterprise/excel-export"
 
 export const configure: AppModuleInitiator = (configurator, { env }) => {
     const { basename } = env
+
     configurator.useFrameworkServiceClient("portal")
-    console.log(configurator)
 
     ModuleRegistry.registerModules([
         ClientSideRowModelModule,
@@ -32,46 +32,21 @@ export const configure: AppModuleInitiator = (configurator, { env }) => {
         ExcelExportModule,
     ])
 
+    configurator.onConfigured((config) => {
+        console.log("application config created", config)
+    })
+
+    /** callback when the application modules has initialized */
+    configurator.onInitialized((instance) => {
+        console.log("application config initialized", instance)
+    })
+
     enableAgGrid(configurator)
+
     enableNavigation(configurator, basename)
     enableContext(configurator, (builder) => {
         builder.setContextType(["ProjectMaster"])
     })
 }
-
-// export const configure: AppModuleInitiator = (configurator, args) => {
-//     const { agGridLicense } = (args.env.config?.environment as { agGridLicense?: string })
-//     console.log("args: ", args.env.config?.environment)
-//     const { basename } = args.env
-
-//     ModuleRegistry.registerModules([
-//         ClientSideRowModelModule,
-//         ColumnsToolPanelModule,
-//         FiltersToolPanelModule,
-//         RangeSelectionModule,
-//         ClipboardModule,
-//         MultiFilterModule,
-//         SetFilterModule,
-//         MenuModule,
-//         GridChartsModule,
-//         ExcelExportModule,
-//     ])
-
-//     if (agGridLicense && agGridLicense.length > 0) {
-//         enableAgGrid(configurator, {
-//             licenseKey: agGridLicense || "",
-//         })
-//     } else {
-//         enableAgGrid(configurator)
-//     }
-
-//     configurator.useFrameworkServiceClient("portal")
-
-//     enableNavigation(configurator, basename)
-
-//     enableContext(configurator, (builder) => {
-//         builder.setContextType(["ProjectMaster"])
-//     })
-// }
 
 export default configure
